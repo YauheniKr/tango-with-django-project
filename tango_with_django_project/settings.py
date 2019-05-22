@@ -79,7 +79,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'tango_with_django_project.wsgi.application'
 
-LOGIN_URL = '/rango/login'
+LOGIN_REDIRECT_URL = '/'
+#LOGIN_URL = '/rango/login'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
