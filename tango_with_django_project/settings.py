@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-from .secret_key import secret_key
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,7 +22,10 @@ MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = secret_key
+key = None
+with open('tango_with_django_project/secret_key.txt') as f:
+    key = f.read().strip()
+SECRET_KEY = key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -39,6 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'rango',
 ]
 
@@ -102,6 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
 """
 # registration redux option
 REGISTRATION_OPEN = True # if true user can register
@@ -109,7 +116,7 @@ ACCOUNT_ACTIVATION_DAYS = 7 # Activation window
 REGISTRATION_AUTO_LOGIN = True # if True user autonatically logged in
 LOGIN_REDIRECT_URL = '/rango'
 LOGIN_URL = '/accounts/login/'
-#REGISTRATION_FORM = 'rango.forms.UserForm'
+REGISTRATION_FORM = 'rango.forms.UserForm'
 """
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
@@ -124,6 +131,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+SITE_ID = 1
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
@@ -134,3 +143,9 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
+
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
