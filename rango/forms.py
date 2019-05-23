@@ -1,7 +1,7 @@
 from django import forms
 from rango.models import Page, Category, UserProfile
 from django.contrib.auth.models import User
-
+from allauth.account.forms import LoginForm
 
 class CategoryForm(forms.ModelForm):
     name = forms.CharField(max_length=128, help_text='Please enter category name')
@@ -39,7 +39,8 @@ class UserForm(forms.ModelForm):
         fields = ('username', 'email', 'password')
 
 
-class UserProfileForm(forms.ModelForm):
+class UserProfileForm(LoginForm):
     class Meta:
         model = UserProfile
         fields = ('website', 'picture')
+
