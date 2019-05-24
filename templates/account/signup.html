@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Register
+{% endblock %}
+
+{% block body_block %}
+    <h1> Register for Rango </h1>
+    {% if registered %}
+        <p>Already have an account? Then please <a href="{{ login_url }}">sign in</a></p>
+        Rango says: <strong> thank you for registering !</strong>
+        <a href="{% url 'index' %}"> Return  to the homepage </a><br />
+    {% else %}
+        Rango says: <strong> register here!</strong><br />
+        <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+    {% endif %}
+  <input type="submit" name="submit" value="Register" />
+</form>
+{% endblock %}
+
+
+
+
+
+
+
