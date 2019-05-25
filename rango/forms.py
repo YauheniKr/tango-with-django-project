@@ -1,7 +1,7 @@
 from django import forms
 from rango.models import Page, Category, UserProfile
 from django.contrib.auth.models import User
-from allauth.account.forms import LoginForm
+from registration.forms import RegistrationForm
 
 
 class CategoryForm(forms.ModelForm):
@@ -40,7 +40,16 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ('username', 'email', 'password')
 
+
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('website', 'picture')
+
+
+class MyRegForm(RegistrationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__()
+        list_field = ['username', 'password1', 'password2']
+        for field in list_field:
+            self.fields[field].help_text = None

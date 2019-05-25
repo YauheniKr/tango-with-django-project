@@ -28,11 +28,11 @@
     <div>
         <ul>
             {% if user.is_authenticated %}
-                <li><a href="{% url 'account_logout' %}">Logout</a></li>
+                <li><a href="{% url 'auth_logout' %}">Logout</a></li>
                 <li><a href="{% url 'restricted' %}">Restricted</a></li>
             {% else %}
-                <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
-                <li><a href="{% url 'account_login' %}">Login</a></li>
+                <li><a href="{% url 'registration_register' %}">Sign Up</a></li>
+                <li><a href="{% url 'auth_login' %}">Login</a></li>
             {% endif %}
             <li><a href="{% url 'about' %}">About</a></li>
             <li><a href="{% url 'index' %}">Index</a></li>

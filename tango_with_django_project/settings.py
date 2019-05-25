@@ -42,10 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
     'rango',
+    'registration'
 ]
 
 MIDDLEWARE = [
@@ -79,8 +77,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'tango_with_django_project.wsgi.application'
 
-LOGIN_REDIRECT_URL = '/'
-#LOGIN_URL = '/rango/login'
+LOGIN_REDIRECT_URL = '/rango'
+LOGIN_URL = '/accounts/login/'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -110,15 +108,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-"""
 # registration redux option
 REGISTRATION_OPEN = True # if true user can register
 ACCOUNT_ACTIVATION_DAYS = 7 # Activation window
 REGISTRATION_AUTO_LOGIN = True # if True user autonatically logged in
-LOGIN_REDIRECT_URL = '/rango'
+LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/accounts/login/'
-REGISTRATION_FORM = 'rango.forms.UserForm'
-"""
+REGISTRATION_FORM = 'rango.forms.MyRegForm'
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
@@ -145,8 +142,3 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 
-
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
-)
