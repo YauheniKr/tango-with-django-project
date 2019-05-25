@@ -19,7 +19,6 @@
 
     <!-- Custom styles for this template -->
     <link href="/static/css/dashboard.css" rel="stylesheet">
-
   </head>
 
   <body>
@@ -48,19 +47,19 @@
 </nav>
 
 </header>
-
-
     <div class="container-fluid">
-      <div class="row">
-		  <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-		       <div class="sidebar-sticky">
+        <div class="row">
+	    	  <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+	    	       <div class="sidebar-sticky">
 
-	        {% block sidebar_block %}
-	            {% gets_category_list %}
-	        {% endblock %}
+	                  {% block sidebar_block %}
+	                      {% gets_category_list %}
+	                  {% endblock %}
+                 </div>
+            </nav>
+        </div>
+    </div>
 
-		 </div>
-	 </nav>
 
  <main role="main" class="col-md-9  ml-sm-auto col-lg-10 px-4">
 	 {% block body_block %}{% endblock %}
