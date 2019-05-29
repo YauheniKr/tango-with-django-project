@@ -5,15 +5,22 @@
 
 {% endblock %}
 {% block body_block %}
-<h1>Rango says</h1>
-    {% if user.is_authenticated %}
-        <div>howdy {{ user.username }}</div>
-        <p>visits: {{ visits }}</p>
-    {% else %}
-        <div>hey there partner! <br />
-            <strong>{{ boldmessage }} </strong>
-        </div>
-    {% endif %}
+<div class="jumbotron p-1">
+    <div class="container">
+        <h1 class="jumbotron-heading p-1">Rango says...</h1>
+            <div>
+                <h2 class="h2">
+                {% if user.is_authenticated %}
+                    Howdy {{ user.username }}!
+                <p>visits: {{ visits }}</p>
+                {% else %}
+                    Hey there partner!
+                {% endif %}
+                </h2>
+                    <strong>{{ boldmessage }} </strong>
+            </div>
+    </div>
+</div>
         <h2>Most Liked Categories</h2>
         {% if categories %}
         <ul>
