@@ -5,7 +5,7 @@ from rango.models import Page
 from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse
+from django.shortcuts import redirect
 from datetime import datetime
 from django.views.generic.edit import FormView
 from .forms import UserForm
@@ -154,3 +154,18 @@ def user_logout(request):
 @login_required()
 def restricted(request):
     return HttpResponse('Since you are logged in, you can see that text !')
+
+def goto_url(request):
+    page_id = None
+    url = '/rango/'
+    if request.method == 'GET':
+        if 'page_id' in request.GET:
+            page_id = request.GET['page_id']
+            try:
+                page = Page.objects.get(id = page_id)
+                page.views += 1
+                page.save()
+                url = page.url
+            except:
+                pass
+    return redirect(url)
