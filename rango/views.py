@@ -177,4 +177,4 @@ def search(request):
         query = request.POST['query'].strip()
         if query:
             result_list = run_query(query)
-    return render(request, 'rango/search.html', {'result_list':result_list})
+    return render(request, 'rango/search.html', {'result_list':result_list, 'query':query})
