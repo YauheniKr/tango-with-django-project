@@ -31,7 +31,7 @@ def run_query(search_terms):
     response = requests.get(search_url, headers=headers, params=params)
     response.raise_for_status()
     search_result = response.json()
-    results = [{'q':search_terms}]
+    results = []
     for result in search_result['webPages']['value']:
         results.append({'title':result['name'],
                        'link':result['url'],

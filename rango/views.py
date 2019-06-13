@@ -172,6 +172,7 @@ def goto_url(request):
     return redirect(url)
 
 def search(request):
+    query=''
     result_list =[]
     if request.method == 'POST':
         query = request.POST['query'].strip()

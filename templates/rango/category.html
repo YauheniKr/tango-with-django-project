@@ -10,7 +10,6 @@
  	<div class="jumbotron p-4">
  	<div class="container">
   		<h1 class="jumbotron-heading">{{ category.name }}</h1>
-
     	<div class="p-1">
     	<strong id="like_count">{{ category.likes }}</strong> people like this category
     	{% if user.is_authenticated %}
@@ -41,6 +40,14 @@
                 {% endif %}
             </ul>
         </div>
+        <br/>
+        <form class="form-inline" id="user_form" method="post" action="{% url 'search' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <input class="form-control" type="text" size="50" name="query" value="{{ query }}" id="query" />
+            </div>
+            <button class="btn btn-primary" type="submit" name="submit" value="Search">Search</button>
+        </form>
     </div>
     <div class="container p=4">
 	    <div class="row">
