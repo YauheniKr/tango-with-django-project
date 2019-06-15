@@ -52,6 +52,13 @@ def about(request):
 
 def show_category(request, category_name_slug):
     context_dict = {}
+    query=''
+    result_list =[]
+    if request.method == 'POST':
+        query = request.POST['query'].strip()
+        if query:
+            result_list = run_query(query)
+    context_dict.update({'result_list':result_list, 'query':query})
     try:
         category = Category.objects.get(slug=category_name_slug)
         pages = Page.objects.filter(category=category)[:5]
@@ -171,6 +178,7 @@ def goto_url(request):
                 pass
     return redirect(url)
 
+"""
 def search(request):
     query=''
     result_list =[]
@@ -179,3 +187,4 @@ def search(request):
         if query:
             result_list = run_query(query)
     return render(request, 'rango/search.html', {'result_list':result_list, 'query':query})
+"""

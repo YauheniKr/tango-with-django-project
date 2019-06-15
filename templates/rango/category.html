@@ -41,27 +41,46 @@
             </ul>
         </div>
         <br/>
-        <form class="form-inline" id="user_form" method="post" action="{% url 'search' %}">
-            {% csrf_token %}
-            <div class="form-group">
-                <input class="form-control" type="text" size="50" name="query" value="{{ query }}" id="query" />
+    </div>
+    {% if user.is_authenticated %}
+        <div class="container p=2">
+	        <div class="row">
+                <a href="{% url 'add_page' category.slug %}">Add a Page</a>
             </div>
-            <button class="btn btn-primary" type="submit" name="submit" value="Search">Search</button>
-        </form>
-    </div>
-    <div class="container p=4">
-	    <div class="row">
-
+        <br/>
         </div>
-    </div>
-     <div class="container p=2">
-	    <div class="row">
-
+        <div class="container p=4">
+            <div class="row">
+                <form class="form-inline" id="user_form" method="post" action="{% url 'show_category' category.slug %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input class="form-control" type="text" size="50" name="query" value="{{ query }}" id="query" />
+                    </div>
+                    <button class="btn btn-primary" type="submit" name="submit" value="Search">Search</button>
+                </form>
+            </div>
         </div>
-     </div>
-        {% if user.is_authenticated %}
-            <a href="{% url 'add_page' category.slug %}">Add a Page</a>
+        <br />
+        {% if result_list %}
+            <div class="container p=4">
+                <div class="row">
+                    <h3>
+                        Results
+                    </h3>
+                    <div class="list-group">
+                        {% for result in result_list %}
+                            <div class="list-group-item">
+                                <h4 class="list-group-item-heading">
+                                    <a href="{{ result.link }}"> {{result.title|safe|escape}}</a>
+                                </h4>
+                                <p class="list-group-item-text">{{result.summary|safe|escape}} </p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
         {% endif %}
+    {% endif %}
     {% else %}
         The specified category does not exist!
     {% endif %}
