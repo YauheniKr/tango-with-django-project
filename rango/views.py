@@ -188,3 +188,12 @@ def search(request):
             result_list = run_query(query)
     return render(request, 'rango/search.html', {'result_list':result_list, 'query':query})
 """
+
+def register_profile(request):
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST)
+        #if form.is_valid():
+        print(form['website'].value())
+    else:
+        form = UserProfileForm()
+    return render(request, 'rango/profile_registration.html', {'form': form})
