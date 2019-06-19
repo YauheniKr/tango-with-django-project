@@ -77,9 +77,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'tango_with_django_project.wsgi.application'
 
-LOGIN_REDIRECT_URL = '/rango'
-LOGIN_URL = '/accounts/login/'
-
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
@@ -112,9 +109,8 @@ AUTH_PASSWORD_VALIDATORS = [
 REGISTRATION_OPEN = True # if true user can register
 ACCOUNT_ACTIVATION_DAYS = 7 # Activation window
 REGISTRATION_AUTO_LOGIN = True # if True user autonatically logged in
-LOGIN_REDIRECT_URL = '/'
+#LOGIN_REDIRECT_URL = '/rango/'
 LOGIN_URL = '/accounts/login/'
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/

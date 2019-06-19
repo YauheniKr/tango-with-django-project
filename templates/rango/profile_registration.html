@@ -3,7 +3,7 @@
 {% load staticfiles %}
 
 {% block title_block %}
-    Create and View Profiles
+    Registration - Step 2
 {% endblock %}
 {% block body_block %}
     <div class="jumbotron p-4" >
@@ -11,7 +11,7 @@
             <h1 class="jumbotron-heading p-1" style="text-align:left">Registration Step 2</h1>
         </div>
     </div>
-    <form class="form" id="login_form" method="post" action="{% url 'register_profile' %}" >
+    <form class="form" id="login_form" method="post" action="." enctype="multipart/form-data">
     {% csrf_token %}
         <div class="container">
             {{ form.as_ul }}

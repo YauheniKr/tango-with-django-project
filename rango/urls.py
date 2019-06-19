@@ -9,6 +9,5 @@ urlpatterns = [
     path('category/<slug:category_name_slug>/add_page/', views.add_page, name = 'add_page'),
     path('restricted/', views.restricted, name='restricted'),
     path('goto/', views.goto_url, name = 'goto'),
-    #path('search/', views.search, name = 'search'),
     path('register_profile/', views.register_profile, name = 'register_profile'),
 ]

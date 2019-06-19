@@ -10,6 +10,15 @@ from datetime import datetime
 from django.views.generic.edit import FormView
 from .forms import UserForm
 from .bing_search import run_query, read_bing_key
+from registration.backends.simple.views import RegistrationView
+from django.urls import reverse
+
+
+class MyRegistrationView(RegistrationView):
+
+    def get_success_url(self, user=None):
+        return reverse('register_profile/')
+
 
 def get_server_side_cookie(request, cookie, default_val = None):
     val = request.session.get(cookie)
@@ -189,11 +198,19 @@ def search(request):
     return render(request, 'rango/search.html', {'result_list':result_list, 'query':query})
 """
 
+@login_required
 def register_profile(request):
+    form = UserProfileForm()
     if request.method == 'POST':
-        form = UserProfileForm(request.POST)
-        #if form.is_valid():
-        print(form['website'].value())
-    else:
-        form = UserProfileForm()
-    return render(request, 'rango/profile_registration.html', {'form': form})
+        form = UserProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            user_profile = form.save(commit=False)
+            user_profile.user = request.user
+            user_profile.save()
+            return redirect('index')
+        else:
+            print(form.errors)
+    context_dict = {'form': form}
+    return render(request, 'rango/profile_registration.html', context_dict)
+
+
