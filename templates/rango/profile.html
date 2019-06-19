@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    {{ user.username }} profile
+{% endblock %}
+{% block body_block %}
+    <div class="jumbotron p-4" >
+        <div class="container">
+            <h1 class="jumbotron-heading p-1" style="text-align:left">Profile for {{ user.username }}</h1>
+        </div>
+    </div>
+    <form class="form" id="account_form" method="post" action="." enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="container">
+            {{ form.as_ul }}
+            <button class="btn btn-primary" type="submit" name="submit" value="Submit">Submit</button>
+        </div>
+    </form>
+{% endblock %}
