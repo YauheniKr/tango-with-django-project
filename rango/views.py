@@ -2,13 +2,14 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from rango.models import Category
 from rango.models import Page
+from rango.models import User, UserProfile
+
 from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from datetime import datetime
 from django.views.generic.edit import FormView
-from .forms import UserForm
 from .bing_search import run_query, read_bing_key
 from registration.backends.simple.views import RegistrationView
 from django.urls import reverse
@@ -213,4 +214,33 @@ def register_profile(request):
     context_dict = {'form': form}
     return render(request, 'rango/profile_registration.html', context_dict)
 
+def profile(request):
+    form = UserProfileForm()
+    context_dict = {}
+    user_profile = {}
+    result_list =[]
+    current_user = request.user
+    if request.method == 'GET':
+        user = User.objects.get(username=current_user)
+        user_profile['email'] = user.email
+        user_profile['website'] = user.userprofile.website
+        user_profile['picture'] = user.userprofile.picture
+        context_dict.update({'user_profile':user_profile})
+        print(context_dict)
+    """
+    
+        query = request.POST['query'].strip()
+        if query:
+            result_list = run_query(query)
+    context_dict.update({'result_list':result_list, 'query':query})
+    
+        category = Category.objects.get(slug=category_name_slug)
+        pages = Page.objects.filter(category=category)[:5]
+        context_dict['pages'] = pages
+        context_dict['category'] = category
+    except Category.DoesNotExist:
+        context_dict['pages'] = None
+        context_dict['category'] = None
+"""
+    return render(request, 'rango/profile.html', context_dict)
 
