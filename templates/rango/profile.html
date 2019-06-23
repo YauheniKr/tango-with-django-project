@@ -9,15 +9,16 @@
     <div class="jumbotron p-4" >
         <div class="container">
             <h1 class="jumbotron-heading p-1" style="text-align:left">Profile for {{ user.username }}</h1>
-            <div class="row">
-                <ul class="list-group p-2">
-                    {% if user_profile %}
-                        email: {{user_profile.email}}
-                        website: <li> {{user_profile.website}}</li>
-                        picture: <li> {{user_profile.picture}}</li>
-                    {% endif %}
-                </ul>
-            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <ul class="list-group"  >
+                {% if user_profile %}
+                    <li> website:  {{user_profile.website}}</li>
+                    <li> picture:  {{user_profile.picture}}</li>
+                {% endif %}
+            </ul>
         </div>
     </div>
     <form class="form" id="account_form" method="post" action="." enctype="multipart/form-data">

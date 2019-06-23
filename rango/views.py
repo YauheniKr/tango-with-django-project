@@ -214,33 +214,34 @@ def register_profile(request):
     context_dict = {'form': form}
     return render(request, 'rango/profile_registration.html', context_dict)
 
-def profile(request):
-    form = UserProfileForm()
-    context_dict = {}
-    user_profile = {}
-    result_list =[]
-    current_user = request.user
-    if request.method == 'GET':
-        user = User.objects.get(username=current_user)
-        user_profile['email'] = user.email
-        user_profile['website'] = user.userprofile.website
-        user_profile['picture'] = user.userprofile.picture
-        context_dict.update({'user_profile':user_profile})
-        print(context_dict)
-    """
-    
-        query = request.POST['query'].strip()
-        if query:
-            result_list = run_query(query)
-    context_dict.update({'result_list':result_list, 'query':query})
-    
-        category = Category.objects.get(slug=category_name_slug)
-        pages = Page.objects.filter(category=category)[:5]
-        context_dict['pages'] = pages
-        context_dict['category'] = category
-    except Category.DoesNotExist:
-        context_dict['pages'] = None
-        context_dict['category'] = None
-"""
-    return render(request, 'rango/profile.html', context_dict)
 
+class ProfileView(View):
+    def get_user_details(self, username):
+        try:
+            user = User.objects.get(username=username)
+
+        except User.DoesNotExist:
+            return redirect('index')
+        userprofile = UserProfile.objects.get_or_create(user=user)[0]
+        form = UserProfileForm({'website': userprofile.website,
+                        'picture': userprofile.picture})
+        return (user, userprofile, form)
+
+
+    @method_decorator(login_required)
+    def get(self, request, username):
+        (user, userprofile, form) = self.get_user_details(username)
+        return render(request, 'rango/profile.html',
+              {'userprofile': userprofile, 'selecteduser': user, 'form': form})
+
+
+    @method_decorator(login_required)
+    def post(self, request, username):
+        (user, userprofile, form) = self.get_user_details(username)
+        form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect('profile', user.username)
+        else:
+            print(form.errors)
+        return render(request, 'rango/profile.html',    {'userprofile': userprofile, 'selecteduser': user, 'form': form})
