@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from rango.models import Category
 from rango.models import Page
 from rango.models import User, UserProfile
-
+from django.views import View
 from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -13,6 +13,7 @@ from django.views.generic.edit import FormView
 from .bing_search import run_query, read_bing_key
 from registration.backends.simple.views import RegistrationView
 from django.urls import reverse
+from django.utils.decorators import method_decorator
 
 
 class MyRegistrationView(RegistrationView):
