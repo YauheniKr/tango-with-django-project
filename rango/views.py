@@ -216,19 +216,21 @@ def register_profile(request):
 
 @login_required
 def profile(request, username):
-    form = UserProfileForm()
-    context_dict = {'form':form}
-    user_profile = {}
-    result_list =[]
-    current_user = request.user
-    if request.method == 'GET':
-        user = User.objects.get(username=current_user)
-        user_profile['website'] = user.userprofile.website
-        user_profile['picture'] = user.userprofile.picture
-        context_dict.update({'user_profile':user_profile})
-        print(context_dict)
-    elif request.method == 'POST':
-        form = CategoryForm(request.POST)
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        return redirect('index')
+    userprofile = UserProfile.objects.get_or_create(user=user)[0]
+    form = UserProfileForm(
+        {'website': userprofile.website, 'picture': userprofile.picture})
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect('profile', user.username)
+        else:
+            print(form.errors)
+    return render(request, 'rango/profile.html', {'userprofile':userprofile, 'user':user, 'form':form})
     """
     
         query = request.POST['query'].strip()
@@ -243,6 +245,5 @@ def profile(request, username):
     except Category.DoesNotExist:
         context_dict['pages'] = None
         context_dict['category'] = None
-"""
-    return render(request, 'rango/profile.html', context_dict)
+    """
 
