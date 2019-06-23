@@ -9,16 +9,22 @@
     <div class="jumbotron p-4" >
         <div class="container">
             <h1 class="jumbotron-heading p-1" style="text-align:left">Profile for {{ user.username }}</h1>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <ul class="list-group"  >
-                {% if user_profile %}
-                    <li> website:  {{user_profile.website}}</li>
-                    <li> picture:  {{user_profile.picture}}</li>
-                {% endif %}
-            </ul>
+            <div class="row">
+                <ul class="list-group p-2">
+                    {% if user_profile %}
+                        website: <li> {{user_profile.website}}</li>
+                        {% if userprofile.picture %}
+                            <img src="{{ MEDIA_URL }}{{user_profile.picture }}"
+	                        width="300"
+	                        height="300"
+	                        alt="{{user.username}}" />
+                        {% else %}
+                            <img width="256" height="256" src="http://lorempixel.com/256/256/people/"/>
+                            {{user_profile.picture }}
+                    {% endif %}
+                        {% endif %}
+                </ul>
+            </div>
         </div>
     </div>
     <form class="form" id="account_form" method="post" action="." enctype="multipart/form-data">
