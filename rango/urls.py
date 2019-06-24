@@ -11,4 +11,5 @@ urlpatterns = [
     path('goto/', views.goto_url, name = 'goto'),
     path('register_profile/', views.register_profile, name = 'register_profile'),
     path('profile/<username>/', views.profile, name = 'profile'),
+    path('profile_list/', views.profile_list, name = 'profile_list')
 ]

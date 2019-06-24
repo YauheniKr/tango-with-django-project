@@ -232,4 +232,7 @@ def profile(request, username):
             print(form.errors)
     return render(request, 'rango/profile.html', {'userprofile':userprofile, 'user':user, 'form':form})
 
+def profile_list(request):
+    pass
+
 

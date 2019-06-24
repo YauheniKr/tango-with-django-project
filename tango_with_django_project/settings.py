@@ -109,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 REGISTRATION_OPEN = True # if true user can register
 ACCOUNT_ACTIVATION_DAYS = 7 # Activation window
 REGISTRATION_AUTO_LOGIN = True # if True user autonatically logged in
-#LOGIN_REDIRECT_URL = '/rango/'
+LOGIN_REDIRECT_URL = '/rango/'
 LOGIN_URL = '/accounts/login/'
 
 # Internationalization
