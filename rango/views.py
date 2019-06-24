@@ -231,19 +231,5 @@ def profile(request, username):
         else:
             print(form.errors)
     return render(request, 'rango/profile.html', {'userprofile':userprofile, 'user':user, 'form':form})
-    """
-    
-        query = request.POST['query'].strip()
-        if query:
-            result_list = run_query(query)
-    context_dict.update({'result_list':result_list, 'query':query})
-    
-        category = Category.objects.get(slug=category_name_slug)
-        pages = Page.objects.filter(category=category)[:5]
-        context_dict['pages'] = pages
-        context_dict['category'] = category
-    except Category.DoesNotExist:
-        context_dict['pages'] = None
-        context_dict['category'] = None
-    """
+
 
