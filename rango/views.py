@@ -233,6 +233,9 @@ def profile(request, username):
     return render(request, 'rango/profile.html', {'userprofile':userprofile, 'user':user, 'form':form})
 
 def profile_list(request):
-    pass
+    profiles = User.objects.all()
+    profile_name = [profile.username for profile in profiles]
+    print(profile_name)
+    return render(request, 'rango/profile_list.html', {'profile_name':profile_name})
 
 

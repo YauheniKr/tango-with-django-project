@@ -16,7 +16,6 @@
             <div class="row">
                 <ul class="list-group p-2">
                     {% if userprofile %}
-                        website: <li> {{userprofile.website}}</li>
                         {% if userprofile.picture %}
                             <img src="{{ MEDIA_URL }}{{userprofile.picture }}"
 	                        width="300"
