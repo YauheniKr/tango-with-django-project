@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body_block %}
+
     <div class="jumbotron p-1">
         <div class="container">
             <h2 class="h3">
@@ -20,4 +21,12 @@
              alt = "Picture of Rango" />
         <img src="{{ MEDIA_URL }}cat.jpg" alt = "Picture of Cat">
     </div>
+<button class="btn btn-primary"
+    onClick="alert('You clicked the button using inline JavaScript.');">
+    Click Me - I run JavaScript
+</button>
+<button class="btn btn-primary" id="about-btn">
+    Click Me - I'm JavaScript on Ice
+</button>
+<p>This text is for a JQuery Example</p>
 {% endblock %}
