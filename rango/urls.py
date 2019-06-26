@@ -13,4 +13,5 @@ urlpatterns = [
     path('profile/<username>/', views.profile, name = 'profile'),
     path('profile_list/', views.profile_list, name = 'profile_list'),
     path('like/', views.like_category, name='like_category'),
+    path('suggest/', views.suggest_category, name='suggest_category'),
 ]
