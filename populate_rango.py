@@ -38,6 +38,11 @@ def populate():
          "url": "http://www.tangowithdjango.com/"
          ,"views": 45}]
 
+    pascal_pages = [
+        {"title":"PascalABC.NET",
+         "url": "http://pascalabc.net/",
+         "views": 1}]
+
     other_pages = [
         {"title": "Bottle",
          "url": "http://bottlepy.org/docs/dev/"
@@ -46,8 +51,39 @@ def populate():
          "url": "http://flask.pocoo.org"
          ,"views": 34}]
 
+    perl_pages = [
+        {"title": "Perl",
+         "url": "https://www.perl.org/",
+         "views": 1}]
+
+    php_pages = [
+        {"title": "PHP",
+         "url": "https://php.net/",
+         "views": 1}]
+
+    prolog_pages = [
+        {"title": "Prolog",
+         "url": "https://www.swi-prolog.org/",
+         "views": 1}]
+
+    postscript_pages = [
+        {"title": "PostScript Definition - The Tech Terms Computer Dictionary",
+         "url": "https://techterms.com/definition/postscript/",
+         "views": 1}]
+
+    programming_pages = [
+        {"title": "Programming and Web Development Online Courses | Udacity",
+         "url": "https://www.udacity.com/school-of-programming",
+         "views": 1}]
+
     cats = {"Python": {"pages": python_pages, "views": 128, "likes":64 },
             "Django": {"pages": django_pages, "views": 64, "likes":32 },
+            "Pascal": {"pages": pascal_pages, "views": 96, "likes":48},
+            "Perl": {"pages": perl_pages, "views": 48, "likes":24},
+            "PHP": {"pages": php_pages, "views": 48, "likes":24},
+            "Prolog": {"pages": prolog_pages, "views": 48, "likes":24},
+            "PostScript": {"pages": postscript_pages, "views": 48, "likes":24},
+            "Programming": {"pages": programming_pages, "views": 48, "likes":24},
             "Other Frameworks": {"pages": other_pages, "views": 32, "likes":16 }}
 
     # If you want to add more catergories or pages,
